@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Détail des observation</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+        <section id="home">
+
+
+        </section>
+
+
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="main_testimonial_text center-content">
+                        <div class="col-md-12 col-sm-12 single_testimonial_text item">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                            <p><br /><br /><h1>Observation : {{observation.id_observation}}</h1></p><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section  -->
+
+        <section id="QuestionText">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <p><h3>Libelle : {{observation.libelle}}</h3></p>
+                        <p><h3>Date de l'observation : {{observation.datecreation}}</h3></p>
+                        <p><h3>Progression : {{observation.progression}}</h3></p>
+                    </div>
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <p><h3>Avis rendu : {{observation.avis}}</h3></p>
+                        <p><h3>Travaux nécessaires : {% if observation.encours %} Oui {%else%} Non {%endif%}</h3></p>
+                        <p><h3>Commentaires : {{ observation.commentaire }}</h3></p>
+                    </div>
+                </div>
+                        <p><a href="{% url 'carto:VueObservations' %}">Retour aux Observation</a></p><br /><br />
+            </div>
+        </section>
+        <section id="QuestionText">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+
+                        <h3>Acteurs associés :</h3>
+                        {% for i in list_gestionnaire.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}
+                        <h3>Zones géographiques concernées :</h3>
+                        {% for i in list_zoneGeo.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}<br /><br /><br /><br />
+                    </div>
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+
+                        <h3>Photos associées :</h3>
+                        <p>Survoler l'item pour afficher la photo</p>
+                        {% for i in list_photos %}
+                        <li><div class="tooltip-photo"><p><h3>{{i}}</h3><span class="tooltiptext"> <img src="/static/{{i.file}}" %}" ><br /> {{i.libelle}}<br /> {{i.description}}</span></p></div></li>
+                        {% endfor %}<br /><br /><br /><br />
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+
+

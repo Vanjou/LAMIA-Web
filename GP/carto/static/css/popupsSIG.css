@@ -1,0 +1,103 @@
+/*
+
+Author: Bootstrapthemes
+Author URI: http://bootstrapthemes.co
+
+*/
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    color: #767676;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    color:#9da6ac;
+}
+
+
+.iframe body {
+	margin: 0;
+	background: linear-gradient(45deg, #49a09d, #5f2c82);
+	font-family: sans-serif;
+	font-weight: 100;
+}
+
+.iframe.container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.iframe table {
+	width: 800px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.iframe th,
+.iframe td {
+	padding: 15px;
+	background-color: rgba(255,255,255,0.2);
+	color: #fff;
+}
+
+.iframe th {
+	text-align: left;
+}
+
+.iframe thead {
+	th {
+		background-color: #55608f;
+	}
+}
+
+.iframe tbody {
+	tr {
+		&:hover {
+			background-color: rgba(255,255,255,0.3);
+		}
+	}
+	td {
+		position: relative;
+		&:hover {
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: -9999px;
+				bottom: -9999px;
+				background-color: rgba(255,255,255,0.2);
+				z-index: -1;
+			}
+		}
+	}
+}
+
+	td {
+		position: relative;
+		
+		font-size: 50px
+			}
+
+
+*{
+
+	font-size: 30px;
+}
+.table*{
+
+	font-size: 30px;
+}
+.table *{
+
+	font-size: 30px;
+}

@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Tableau De Bord</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+        <section id="home">
+            <div id="bgimage" class="header-image">
+                <div class="container">
+                    <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                        <div class="col-sm-5 col-xs-12"><br /><br />
+                            <div class="tableaudebord wow zoomIn" data-wow-duration="1s">
+                                <h1 >Votre projet : </h1>
+                                    <p class="bannerDescription">Fiche client : {{projet.client}}</p>
+                                    <p class="bannerDescription">Type de projet : {{projet.datatype}}</p>
+                                    <p class="bannerDescription">Localisation : {{projet.localisation}}</p>
+                                    <p class="bannerDescription">Date de début : {{ projet.datecreation}}</p>
+                                    <p class="bannerDescription">Dernière mise à jour de vos données : {{ projet.dateversion}}</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5 col-xs-12"><br /><br />
+                            <div class=" wow zoomIn" data-wow-duration="1s">
+                                <h1>{{ projet.nom }} </h1>
+                                <p class="bannerDescription"> Votre responsable projet : {{projet.client}}</p>
+                                <p class="bannerDescription"> Votre contact : {{projet.contactclient}}</p>
+                                <p class="bannerDescription"> Votre référent ARTELIA : {{projet.referantartelia}}</p>
+                                <p class="bannerDescription"> Contact ARTELIA : {{projet.contactartelia}}</p>
+                            </div>
+                        </div>
+                    </div> <!-- end of row -->
+                </div> <!-- end of container --><br />
+
+
+            </div>
+
+        </section>
+
+
+        <!-- Description Third Section -->
+        <section id="description_third">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="main_des_third_contant">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="left_desc_img center-content wow fadeInLeft" data-wow-duration="1.5s">
+                                <img src="{% static "images/rapport.png" %}" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="right_desc_text wow fadeIn" data-wow-duration="1.5s">
+                                <h4>Suivi de vos ouvrages :</h4>
+
+                                <li><p>Nombre de photos : {{nb_photos}}</p></li>
+                                <li><p>Nombre de cartes : {{nb_cartes}}</p></li>
+                                <li><p>Nombre de tronçons : {{nb_troncons}}</p></li>
+                                <li><p>Nombre de noeuds : {{nb_noeuds}}</p></li>
+                                <li><p>Nombre d'équipement : {{nb_equipements}}</p></li>
+                                <li><p>Nombre d'éléments environnementaux : {{nb_element_env}}</p></li>
+                                <li><p>Nombre de désordres signalés: {{nb_desordres}}</p></li>
+                                <li><p>Nombre d'observations effectuées : {{nb_observations}}</p></li>
+                                <li><p>Nombre d'évènements et travaux à venir : {{a_venir}}</p></li>
+
+                                <h4>Prochains évènements :  </h4>
+                                <p>Travaux :</p>
+                                {% for travaux in list_travaux %}
+                                <li><p><a href ="{% url 'carto:calendrier' %}">{{travaux}}</a></p></li>
+                                {% endfor %}
+                                <p>Autres évènements :</p>
+                                {% for event in list_evenements %}
+                                <li><p><a href ="{% url 'carto:calendrier' %}">{{event}}</a></p></li>
+                                {% endfor %}
+
+
+                                <br /><br /><br /><br />
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Our Testimonial  -->
+
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="rubriques center-content">
+                        <h4>Vos rubriques</h4>
+                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                            <p><a href="{% url 'carto:Troncons' %}" style="color: #fff"><h3>Vos Infrastructures linéaires</h3></a></p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                            <p><a href="{% url 'carto:Noeuds' %}" style="color: #fff"><h3>Vos Noeuds</h3></a></p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                            <p><a href="{% url 'carto:Equipements' %}" style="color: #fff"><h3>Vos Equipements</h3></a></p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                            <p><a href="{% url 'carto:Environnements' %}" style="color: #fff"><h3>Vos Elements environnementaux</h3></a></p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                            <p><a href="{% url 'carto:Desordres' %}" style="color: #fff"><h3>Vos Désordres</h3></a></p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                            <p><a href="{% url 'carto:VueTravaux' %}" style="color: #fff"><h3>Vos Travaux</h3></a></p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                            <p><a href="{% url 'carto:VueObservations' %}" style="color: #fff"><h3>Vos Observations</h3></a></p>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                            <p><a href="{% url 'carto:Etudes' %}" style="color: #fff"><h3>Vos Etudes</h3></a></p>
+                        </div>
+                    </div>
+                </div><br /><br /><br /><br />
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                <p><h1 style="color: #fff">Vos cartes</h1></p>
+                <div class="right_desc_text wow fadeIn" data-wow-duration="1.5s">
+                    <div id="map" class="map"></div>
+                    <div id="popup" class="ol-popup">
+                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                    <div id="popup-content"></div>
+                    <script>
+
+
+                      var container = document.getElementById('popup');
+                      var content = document.getElementById('popup-content');
+                      var closer = document.getElementById('popup-closer');
+
+
+                      var overlay = new ol.Overlay(({element: container, autoPan: true, autoPanAnimation: {duration: 250}}));
+                      var view = new ol.View({center: [-100000,5600000],zoom: 9});
+
+                      closer.onclick = function() {
+                        overlay.setPosition(undefined);
+                        closer.blur();
+                        return false;
+                      };
+
+
+
+
+                      var layers = [
+                        new ol.layer.Tile({
+                          source: new ol.source.OSM()
+                        }),
+
+                        {% for layer in list_layers %}
+
+                        new ol.layer.Tile({
+                          source: new ol.source.TileWMS({
+                            url: 'http://localhost:8080/geoserver/wms/{{ layer.store }}',
+                            params: {'LAYERS': '{{ layer.store }}:{{ layer.ref }}', 'TILED': true},
+                            serverType: 'geoserver'
+                          })
+                        }),
+
+                        {% endfor %}
+];
+
+                        var param_layers=[];
+                        {% for layer in list_layers %}
+
+                          var source_digues = new ol.source.TileWMS({
+                            url: 'http://localhost:8080/geoserver/wms/{{ layer.store }}',
+                            params: {'LAYERS': '{{ layer.store }}:{{ layer.ref }}', 'TILED': true},
+                            serverType: 'geoserver'
+                          });
+
+                          param_layers.push(source_digues.getParams().LAYERS);
+                        {% endfor %}
+
+
+                      var map = new ol.Map({
+                        layers: layers,
+                        overlays: [overlay],
+                        target: 'map',
+                        view: view
+                      });
+
+
+
+                            map.on('singleclick', function(evt) {
+                              var coordinate = evt.coordinate;
+                              var viewResolution = /** @type {number} */ (view.getResolution());
+                              var url = source_digues.getGetFeatureInfoUrl(
+                                  evt.coordinate, viewResolution, 'EPSG:3857',
+                                  {'INFO_FORMAT': 'text/html', 'LAYERS':param_layers, 'QUERY_LAYERS':param_layers});
+                              if (url) {
+
+                                var txts = '<iframe id="iframeTable" name ="iframeTable" seamless src="' + url + '"></iframe>';
+                                var cssLink = document.createElement("link");
+                                cssLink.href = "{% static "css/popupsSIG.css" %}";
+                                cssLink.rel = "stylesheet";
+                                cssLink.type = "text/css";
+                                content.innerHTML = '<code>'+txts +'</code>';
+                                /*var test = window.frames['iframeTable'].document.body.appendChild(cssLink);*/
+                                overlay.setPosition(coordinate);
+                              }
+                            });
+
+
+                          map.on('pointermove', function(evt) {
+                            if (evt.dragging) {
+                              return;
+                            }
+                            var pixel = map.getEventPixel(evt.originalEvent);
+                            var hit = map.forEachLayerAtPixel(pixel, function() {
+                              return true;
+                            });
+                            map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+                          });
+
+                    </script>
+<style>
+    #iframeTable { width:500px; height:200px; }
+</style>
+                </div>
+            </div> <br /><br />
+        </section>
+
+    {% endblock %}
+
+

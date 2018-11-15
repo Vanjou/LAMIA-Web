@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Messagerie</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+        <section id="home">
+
+
+        </section>
+
+
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="main_testimonial_text center-content">
+                        <div class="col-md-12 col-sm-12 single_testimonial_text item">
+                            <p><br /><br /><h3>Collaborez facilement avec vos différents partenaires, quels qu'ils soient, à travers une plateforme d'échange de messages simplifiée. </h3></p><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section  -->
+    {% if user.is_authenticated %}
+        <section id="downloadApps">
+            <div class="container">
+                <div class="row">
+                    <div class="download_heading_text center-content">
+                         <table style="width:100%">
+                              <tr>
+                                <th><h3>Id</h3></th>
+                                <th><h3>Expéditeur</h3></th>
+                                <th><h3>Objet</h3></th>
+                                <th><h3>Lu</h3></th>
+                              </tr>
+                                {% for message in list_messages %}
+                                  <tr>
+                                    <td><h3>{{ message.id_messagetiers }}</h3></td>
+                                    <td><h3>{{ message.sender }}</h3></td>
+                                    <td><h3><a href="{% url 'carto:forum' %}{{ message.id_messagetiers }}">{{ message.objet }}</a></a></td>
+                                    <td><h3>{{ message.lu }}</h3></td>
+                                  </tr>
+                                {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+
+        <section id="downloadApps">
+            <div class="container">
+                {% if post %}
+                    {% if success %}
+                    <h3>Message envoyé avec succès !</h3>
+                    {% else %}
+                    <h3>Veuillez compléter tous les champs !</h3>
+                    {% endif %}
+                {% endif %}
+                <h2>Formulaire de contact :</h2>
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    <p><h3> Projet concerné : {{ form.destinataire }}</h3></p>
+                    <p> <h3>Expéditeur :    {{ form.sender }}</h3></p>
+                    <p><h3> Objet : {{ form.objet }}</h3></p>
+                    <p><h3> Message : <br />{{ form.text }}</h3></p>
+                    <input type="submit" value="Envoyer votre message" />
+                </form>
+            </div><br /><br /><br />
+        </section>
+    {% endblock %}
+
+

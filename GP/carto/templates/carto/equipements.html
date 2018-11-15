@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Equipements</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+        <section id="home">
+
+
+        </section>
+
+
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="main_testimonial_text center-content">
+                        <div class="col-md-12 col-sm-12 single_testimonial_text item">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                            <p><br /><br /><h1>Liste de vos Equipements </h1></p><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section  -->
+    {% if user.is_authenticated %}
+        <section id="downloadApps">
+            <div class="container">
+                <div class="row">
+                    <div class="download_heading_text center-content">
+                         <table style="width:100%">
+                              <tr class="headertable">
+                                <th class="borderHead">Id</th>
+                                <th>Libelle</th>
+                                <th>Importance stratégique</th>
+                                <th>Etat de fonctionnement</th>
+                              </tr>
+                                {% for equipement in equipements %}
+                                  <tr class="corps">
+                                    <td class="border"><a href="{% url 'carto:Equipements' %}{{ equipement.id_equipement }}">{{ equipement.id_equipement }}</a></td>
+                                    <td><div class="tooltip">{{ equipement.libelle }}<span class="tooltiptext">{{ equipement.commentaire }}</span></div></td>
+                                    <td>{{ equipement.importancestrat }}</td>
+                                    <td>{{ equipement.etatfonct }}</td>
+                                  </tr>
+                                {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+<style>
+/* Google fonts - Open Sans */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+.border {
+    border-left: 5px solid orange;
+
+}
+.headertable{
+    background-color:#f5f5f5
+}
+.border a{
+    color : orange;
+}
+.borderHead {
+    border-left: 5px solid grey;
+    text-color: grey;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.corps:hover{
+    background-color:#f5f5f5;
+    transform: scale(1.025);
+}
+.corps:hover + .cache {
+  position: static;
+  opacity: 1;
+  transition: opacity 0.5s linear;
+}
+.cache{
+  position:absolute;
+  opacity: 0;
+}
+
+</style>
+
+        <section id="downloadApps">
+
+        </section>
+    {% endblock %}
+
+

@@ -1,0 +1,151 @@
+/*.cal_calendrier
+{
+    font-size : 20px;
+    border:1px solid black;
+    padding:1px;
+    background-color:#4594ff;
+    width:1400px;
+    margin:auto;
+    height:60px;
+    background-image:url("../images/visuel_accueil_intranet12.jpg");
+    table-layout:fixed;
+    color:#003557;
+
+}
+.cal_calendrier th
+{
+    font-size : 20px;
+    border:1px solid black;
+    background-color:#ffffff;
+    table-layout:fixed;
+    height: 80px;
+    color:#003557;
+}
+.cal_calendrier td
+{
+    font-size : 17px;
+    border:1px solid black;
+    background-color:#ffffff;
+    text-align:center;
+    overflow: hidden;
+
+    height: 120px;
+}
+.cal_aujourdhui
+{
+    font-size : 17px;
+    color:#ff0000;
+}
+.cal_jours_av_ap
+{
+    font-size : 17px;
+    color:black;
+} */
+
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+
+div, ul, li{
+    list-style-type: none;
+}
+
+.planner{
+    width:1200px;
+    margin: 100px auto;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    border-radius: 5px;
+    overflow: hidden;
+ 
+
+}
+
+.calendar{
+
+    padding: 10px;
+    width:1400px;
+    background-color: #333333;
+
+}
+
+.calendar-header{
+    color: #a7a7a7;
+    border-bottom: 1px solid #484848;
+    margin: 0; padding: 0;
+    text-align: center;
+    line-height: 0px;
+    font-size: 25px;
+    padding-bottom: 10px;
+    
+    span, a{
+        display: inline-block;
+        font-size: 38px;
+        font-weight: 200;
+        text-align: center;
+        line-height: 38px;
+    }
+    
+  a{
+    &:hover{
+      color: #98cd60;
+      cursor: pointer;
+    }
+  }
+  
+
+
+    &::after{
+        content: '';
+        display: inline-block;
+        width: 100%;
+    }
+}
+
+table{
+
+    width: 100%;
+    padding: 10px;
+    color: #9d9d9d;
+}
+
+th{
+    font-weight: normal;
+    font-size: 20px;
+    color: #5b5b5b;
+    width: 14.3%;
+}
+
+td{
+    font-weight: normal;
+    font-size: 16px;
+    text-align: center;
+    height: 80px;
+}
+
+
+  .planner a:visited{color: #9d9d9d;}
+
+  .planner a:link{color: #9d9d9d;}
+
+  .planner a:hover{
+         font-weight: bold;
+  }
+
+  .cal_jours_av_ap{
+    color: #5b5b5b;
+  }
+  .cal_aujourdhui a:link{
+    color: #98cd60;
+  }
+  .cal_aujourdhui a:visited{color: #98cd60;}
+
+ .active {
+
+        border: 2px solid #98cd60;
+        border-radius: 20px;
+ }
+
+
+
+
+

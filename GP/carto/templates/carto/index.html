@@ -1,0 +1,290 @@
+{% extends "baseAccueil.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Accueil</title>
+    {% endblock %}
+
+    {% block content %}
+<style>
+    #iframeTable { width:900px; height:300px; }
+</style>
+
+
+        <section id="home">
+            <div id="bgimage" class="header-image">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-sm-5 col-xs-12"><br /><br />
+                            <div class="iphone center-content wow fadeInLeft" data-wow-duration="1s">
+                                <img src="{% static "images/Logo_LAMIA_transparent.png" %}" alt="" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-7 col-xs-12 heading-text">
+                            <div class="single_home_content wow zoomIn" data-wow-duration="1s">
+                <h1>Bienvenue sur LAMIA :<br /> Le portail SIG ARTELIA</h1>
+                <p class="bannerDescription">Le portail SIG vous permet d'accéder rapidement à l'ensemble des rendus et documents liés à votre étude. </p>
+                <div class="button">
+                  <a href="{% url 'carto:connexion' %}" class="btn">Accédez à votre compte</a>
+                </div>
+              </div>
+                        </div>
+
+                    </div> <!-- end of row -->
+                </div> <!-- end of container -->
+
+                <div class="scrolldown">
+                    <a href="#apps_gallery" class="scroll_btn js-scrollTo"></a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Description Third Section -->
+        <section id="description_third">
+            <div class="container">
+                <div class="row">
+                    <div class="main_des_third_contant">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="left_desc_img center-content wow fadeInLeft" data-wow-duration="1.5s">
+                                <img src="{% static "images/patrimoine.png" %}" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="right_desc_text wow fadeIn" data-wow-duration="1.5s">
+                                <br /><br /><br />
+                                <h4>L'expertise ARTELIA à portée de main</h4>
+
+                                <p>Grace au portail de Gestion Patrimoniale ARTELIA, toutes les informations liées à votre étude sont centralisées sur une unique interface. Vous accédez rapidement à vos données, vos rapports, vous pouvez croiser les cartes produites par nos équipes et même rejouez les modélisations qui ont été effectuées au cours de nos travaux pour mieux comprendre les phénomènes en jeu. </p>
+
+                                <p>Les données sont hébergées chez ARTELIA et leur maintenance ne vous coute rien, même après la fin de l'étude. Si vous le désirez, il est également possible de monter le même serveur chez vous, pour que vous puissiez conserver vos données à domicile. Dans tous les cas, nos clients restent propriétaires de leurs données et celles-ci sont accessibles à tout moment en téléchargement gratuit. </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div><br /><br />
+        </section>
+
+ <!-- Apps Gallary  -->
+
+        <section id="apps_gallery">
+            <div class="container">
+                <div class="row">
+                    <br />
+                    <div class="gallery_heading_text center-content">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                        <h1>Notre SIG</h1>
+                        <img src="{% static "images/lizmap.png" %}" alt="" />
+                        <p class="description">Accédez à toutes les cartes de votre étude en temps réel et depuis n'importe quelle plateforme à travers notre portail web, généré par Lizmap. </p>
+                        <a href="http://lamia.arteliagroup.com:8082/index.php" class="btn">Votre SIG</a>
+                    </div>
+                    <br />
+                    <!---
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="gallery_carousel center-content">
+
+                    <div id="map" class="map"></div>
+                    <div id="popup" class="ol-popup">
+                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                    <div id="popup-content"></div>
+                    <script>
+
+
+                      var container = document.getElementById('popup');
+                      var content = document.getElementById('popup-content');
+                      var closer = document.getElementById('popup-closer');
+
+
+
+                      var overlay = new ol.Overlay(({element: container, autoPan: true, autoPanAnimation: {duration: 250}}));
+                      var view = new ol.View({center: [-100000,5600000],zoom: 9});
+
+                      closer.onclick = function() {
+                        overlay.setPosition(undefined);
+                        closer.blur();
+                        return false;
+                      };
+
+
+                      var layers = [
+                        new ol.layer.Tile({
+                          source: new ol.source.OSM()
+                        }),
+                        new ol.layer.Tile({
+                          source: new ol.source.TileWMS({
+                            url: 'http://localhost:8080/geoserver/wms/TestBordeaux',
+                            params: {'LAYERS': 'TestBordeaux:troncons', 'TILED': true},
+                            serverType: 'geoserver'
+                          })
+                        }),
+                        new ol.layer.Tile({
+                          source: new ol.source.TileWMS({
+                            url: 'http://localhost:8080/geoserver/wms/postgis',
+                            params: {'LAYERS': 'postgis:photo', 'TILED': true},
+                            serverType: 'geoserver'
+                          })
+                        })
+                      ];
+
+                        var param_layers=[];
+
+                        var source_digues = new ol.source.TileWMS({
+                            url: 'http://localhost:8080/geoserver/wms/postgis',
+                            params: {'LAYERS': 'postgis:photo', 'TILED': true},
+                            serverType: 'geoserver'
+                          });
+
+                        param_layers.push(source_digues.getParams().LAYERS);
+                        var source_digues = new ol.source.TileWMS({
+                            url: 'http://localhost:8080/geoserver/wms/TestBordeaux',
+                            params: {'LAYERS': 'TestBordeaux:troncons', 'TILED': true},
+                            serverType: 'geoserver'
+                          });
+
+                        param_layers.push(source_digues.getParams().LAYERS);
+
+
+                      var map = new ol.Map({
+                        layers: layers,
+                        overlays: [overlay],
+                        target: 'map',
+                        view: view
+                      });
+
+                            map.on('singleclick', function(evt) {
+                              var coordinate = evt.coordinate;
+                              var viewResolution = /** @type {number} */ (view.getResolution());
+                              var url = source_digues.getGetFeatureInfoUrl(
+                                  evt.coordinate, viewResolution, 'EPSG:3857',
+                                  {'INFO_FORMAT': 'text/html', 'LAYERS':param_layers, 'QUERY_LAYERS':param_layers});
+                              if (url) {
+                                var txts = '<iframe id="iframeTable" name ="iframeTable" seamless src="' + url + '"></iframe>';
+                                var allFeatures = new ol.format.WMSGetFeatureInfo().readFeatures(url);
+                                content.innerHTML =  'Accédez ic à toutes vos données et visualisez toutes vos informations en cliquant directement sur la carte ! <p></p><code>'+txts +'</code>';
+                                overlay.setPosition(coordinate);
+                              }
+                            });
+
+
+
+                            map.on('pointermove', function(evt) {
+                            if (evt.dragging) {
+                              return;
+                            }
+                            var pixel = map.getEventPixel(evt.originalEvent);
+                            var hit = map.forEachLayerAtPixel(pixel, function() {
+                              return true;
+                            });
+                            map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+                          });
+                    </script>
+
+                        </div>
+                    </div>
+                </div>
+                -->
+
+            </div><br /><br />
+        </section>
+
+
+        <!-- Download Section  -->
+
+        <section id="downloadApps">
+            <div class="container">
+                <div class="row">
+                    <div class="download_heading_text center-content">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                        <h1>Le meilleur du logiciel libre</h1>
+                        <p>ARTELIA s'engage pour le logicel libre auprès de ses clients et propose des solutions reposant uniquement sur les meilleurs outils open source selectionnés pour vous</p>
+
+                        <div class="down_text_des wow fadeInUp" data-wow-duration="1.5s">
+                            <a href="https://www.djangoproject.com/"><img src="{% static "images/django-python.png" %}" alt="" /></a>
+                            <a href="https://www.postgresql.org/"><img src="{% static "images/logo_postgresql2.png" %}" alt="" /></a>
+                            <a href="http://www.postgis.net/"><img src="{% static "images/postgis-logo.png" %}" alt="" /></a>
+                        </div>
+                        <div class="down_text_des wow fadeInUp" data-wow-duration="1.5s">
+                            <a href="https://www.3liz.com/lizmap.html"><img src="{% static "images/lizmap_fond.png" %}" alt="" /></a>
+                            <a href="https://openlayers.org/"><img src="{% static "images/openlayers.png" %}" alt="" /></a>
+                            <a href="http://openstreetmap.fr/"><img src="{% static "images/openstreetmap.png" %}" alt="" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+            <section id="works" class="center-content">
+            <div class="container">
+                <div class="row">
+                    <div class="works_content text-center">
+                    <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                                <br />
+                                <br />
+                                <h1>Les avantages de LAMIA</h1>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                        <div class="col-md-3 col-sm-6 col-xs-12" >
+                            <div class="single_works_text wow fadeInLeft" data-wow-duration=".8s" >
+                                <a href="{% url 'carto:cartes' %}"><i class="fa fa-rocket" ></i></a>
+                                <h3>Des cartes accessibles</h3>
+                                <p>Visionnez toutes vos cartes en toute simplicité depuis votre ordinateur, tablette ou smartphone</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="single_works_text wow fadeInLeft" data-wow-duration=".8s">
+                                <a href="{% url 'carto:outils' %}"><i class="fa fa-crop"></i></a>
+                                <h3>L'expertise ARTELIA</h3>
+                                <p>Toute l'expertise ARTELIA centralisée sur une unique plateforme, ergonomique</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="single_works_text wow fadeInLeft" data-wow-duration="1.2s">
+                                <a href="#downloadApps"><i class="fa fa-magic"></i></a>
+                                <h3>La magie Open Source</h3>
+                                <p>Notre plateforme repose uniquement sur des outils Open Source, accessible à tous.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="single_works_text wow fadeInLeft" data-wow-duration="1.5s">
+                                <a href="{% url 'carto:calendrier' %}"><i class="fa fa-code-fork"></i></a>
+                                <h3>Gérez votre patrimoine</h3>
+                                <p>Gardez toujours un oeil sur vos échéances, vos travaux prévus et à prévoir. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+
+        <section id="testimonial">
+            <div class="container">
+                    <div class="row">
+                            <div class="video_text center-content">
+                            <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                                <h1>Regardez notre vidéo de présentation</h1>
+                                 <video width="1024" height="768" controls>
+                                  <source src="{% static "LAMIA.mp4" %}" type="video/mp4">
+                                </video>
+                                </a>
+                            </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+
+

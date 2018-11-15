@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Identifciation</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+        <section id="work">
+            <div class="container"><br /><br /><br /><br /><br /><br /><br />
+            </div>
+        </section>
+        <section id="description_third">
+            <div class="container">
+                <br /><br /><br />
+                {% if error %}
+                <p><strong>Utilisateur inconnu ou mauvais de mot de passe.</strong></p>
+                {% endif %}
+
+                {% if user.is_authenticated %}
+                Vous êtes connecté, {{ user.username }} !
+                {% else %}
+
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Se connecter" />
+                </form>
+                <a href="{% url 'carto:mailModifMDP' %}">Mot de passe oublié ?</a>
+                {% endif %}
+
+            </div>
+        </section>
+    {% endblock %}

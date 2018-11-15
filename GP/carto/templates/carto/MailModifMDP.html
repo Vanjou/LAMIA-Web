@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Changement de mot de passe</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+        <section id="work">
+            <div class="container"><br /><br /><br /><br /><br /><br /><br />
+            </div>
+        </section>
+        <section id="description_third">
+            <div class="container">
+                <br /><br /><br />
+
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Envoyer un mail pour modifier le mot de passe" />
+                </form>
+
+            </div>
+        </section>
+    {% endblock %}

@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - SIG</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+
+
+ <!-- Apps Gallary  -->
+
+        <section id="apps_gallery"><br /><br /><br />
+            <div class="container">
+                <div class="row">
+                    <div class="gallery_heading_text center-content"><br />
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                        <h1>Votre SIG</h1>
+                        <p class="description">Vous accédez à toutes les cartes de votre étude en temps réel et depuis n'importe quelle plateforme à travers notre portail web. </p>
+
+            <div class="container">
+                <div class="row">
+                    <div class="main_des_third_contant">
+                        <div class="col-md-4 col-sm-4 col-xs-12 fondBlanc">
+                            <h3>Liste des couches disponibles : </h3><br /><br /><br /><br />
+
+                                <!--<form action="/carto/cartes/" method="post"  enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form }}
+                               <input type="submit" value="Mettre à jour la carte" />
+                                </form>-->
+                                <form action="/carto/cartes/" method="post"  enctype="multipart/form-data">
+                                {% csrf_token %}
+                                    <div class="fieldWrapper">
+                                        {% for layer in form.Layers %}
+                                        <div class="tooltip">
+                                            {{ layer }}
+                                            {% for layerObject in layerObjects %}
+                                                {% if layer.choice_label|slugify == layerObject.name|slugify %}
+                                                    <span class="tooltiptext">{{layerObject.libelle}} : {{layerObject.commentaire}}
+                                                    </span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div><br />
+                                        {% endfor %}
+                                    </div>
+                                    <p><input type="submit" value="Mettre à jour la carte" /></p>
+                                </form>
+
+
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <div class="right_desc_text wow fadeIn" data-wow-duration="1.5s">
+
+                    <div id="map" class="map"></div>
+                    <div id="popup" class="ol-popup">
+                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                    <div id="popup-content"></div>
+                    <script>
+
+
+                      var container = document.getElementById('popup');
+                      var content = document.getElementById('popup-content');
+                      var closer = document.getElementById('popup-closer');
+
+
+                      var overlay = new ol.Overlay(({element: container, autoPan: true, autoPanAnimation: {duration: 250}}));
+                      var view = new ol.View({center: [-100000,5600000],zoom: 9});
+
+                      closer.onclick = function() {
+                        overlay.setPosition(undefined);
+                        closer.blur();
+                        return false;
+                      };
+
+
+
+
+                      var layers = [
+                        new ol.layer.Tile({
+                          source: new ol.source.OSM()
+                        }),
+
+                        {% for layer in list_layers %}
+
+                        new ol.layer.Tile({
+                          source: new ol.source.TileWMS({
+                            url: 'http://localhost:8080/geoserver/wms/{{ layer.store }}',
+                            params: {'LAYERS': '{{ layer.store }}:{{ layer.ref }}', 'TILED': true},
+                            serverType: 'geoserver'
+                          })
+                        }),
+
+                        {% endfor %}
+];
+
+                        var param_layers=[];
+                        {% for layer in list_layers %}
+
+                          var source_digues = new ol.source.TileWMS({
+                            url: 'http://localhost:8080/geoserver/wms/{{ layer.store }}',
+                            params: {'LAYERS': '{{ layer.store }}:{{ layer.ref }}', 'TILED': true},
+                            serverType: 'geoserver'
+                          });
+
+                          param_layers.push(source_digues.getParams().LAYERS);
+                        {% endfor %}
+
+
+                      var map = new ol.Map({
+                        layers: layers,
+                        overlays: [overlay],
+                        target: 'map',
+                        view: view
+                      });
+
+
+
+                            map.on('singleclick', function(evt) {
+                              var coordinate = evt.coordinate;
+                              var viewResolution = /** @type {number} */ (view.getResolution());
+                              var url = source_digues.getGetFeatureInfoUrl(
+                                  evt.coordinate, viewResolution, 'EPSG:3857',
+                                  {'INFO_FORMAT': 'text/html', 'LAYERS':param_layers, 'QUERY_LAYERS':param_layers});
+                              if (url) {
+
+                                var txts = '<iframe id="iframeTable" name ="iframeTable" seamless src="' + url + '"></iframe>';
+                                content.innerHTML = '<br /><code>'+txts +'</code>';
+                                overlay.setPosition(coordinate);
+                              }
+                            });
+
+
+                          map.on('pointermove', function(evt) {
+                            if (evt.dragging) {
+                              return;
+                            }
+                            var pixel = map.getEventPixel(evt.originalEvent);
+                            var hit = map.forEachLayerAtPixel(pixel, function() {
+                              return true;
+                            });
+                            map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+                          });
+
+                    </script>
+<style>
+    #iframeTable { width:500px; height:200px; }
+</style>
+                        </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="gallery_carousel center-content">
+
+                    </div>
+                </div>
+                <p><br /><br /><br /></p>
+
+            </div>
+        </section>
+
+    {% endblock %}
+
+

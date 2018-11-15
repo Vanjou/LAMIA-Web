@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Travaux</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+        <section id="home">
+
+
+        </section>
+
+
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="main_testimonial_text center-content">
+                        <div class="col-md-12 col-sm-12 single_testimonial_text item">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                            <p><br /><br /><h1>Liste de vos Travaux et des Interventions des Tiers </h1></p><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section  -->
+    {% if user.is_authenticated %}
+        <section id="downloadApps">
+            <div class="container">
+                <div class="row">
+                    <h3>Liste des Travaux</h3>
+                    <div class="download_heading_text center-content">
+                         <table style="width:100%">
+                              <tr class="headertable">
+                                <th class="borderHead">Id</th>
+                                <th>Libelle</th>
+                                <th>Urgence</th>
+                                <th>Phase</th>
+                                <th>Echéance estimée</th>
+                              </tr>
+                                {% for travail in travaux %}
+                                  <tr class="corps">
+                                    <td class="border"><a href="{% url 'carto:VueTravaux' %}{{ travail.id_travaux }}">{{ travail.id_travaux }}</a></td>
+                                    <td><div class="tooltip">{{ travail.libelle }}<span class="tooltiptext">{{ travail.commentaire }}</span></div></td>
+                                    <td>{{ travail.urgence }}</td>
+                                    <td>{{ travail.phase }}</td>
+                                    <td>{{ travail.estimationecheance }}</td>
+                                  </tr>
+                                {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+                <section id="downloadApps">
+            <div class="container">
+                <div class="row">
+                    <h3>Liste des Interventions de Tiers</h3>
+                    <div class="download_heading_text center-content">
+                         <table style="width:100%">
+                              <tr class="headertable">
+                                <th class="borderHead">Id</th>
+                                <th>Libelle</th>
+                                <th>Urgence</th>
+                                <th>Phase</th>
+                                <th>Echéance estimée</th>
+                              </tr>
+                                {% for travail in interventionsTiers %}
+                                  <tr class="corps">
+                                    <td class="border"><a href="http://127.0.0.1:8000/interventionTiers/{{ travail.id_interventionTiers }}">{{ travail.id_interventionTiers }}</a></td>
+                                    <td>{{ travail.libelle }}</td>
+                                    <td>{{ travail.urgence }}</td>
+                                    <td>{{ travail.phase }}</td>
+                                    <td>{{ travail.estimationecheance }}</td>
+                                  </tr>
+                                  <tr class="cache">
+                                    <td>   </td>
+                                    <td>{{ travail.commentaire }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+<style>
+/* Google fonts - Open Sans */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  font-family: 'Open Sans', sans-serif;
+}
+.border {
+    border-left: 5px solid orange;
+
+}
+.headertable{
+    background-color:#f5f5f5
+}
+.border a{
+    color : orange;
+}
+.borderHead {
+    border-left: 5px solid grey;
+    text-color: grey;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.corps:hover{
+    background-color:#f5f5f5;
+    transform: scale(1.025);
+}
+.corps:hover + .cache {
+  position: static;
+  opacity: 1;
+  transition: opacity 0.5s linear;
+}
+.cache{
+  position:absolute;
+  opacity: 0;
+}
+
+</style>
+        <section id="downloadApps">
+
+        </section>
+    {% endblock %}
+
+

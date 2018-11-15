@@ -1,0 +1,53 @@
+
+{% extends "base.html" %}{% load static %}
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Calendrier</title>
+    {% endblock %}
+
+    {% block content %}
+    <head>
+
+    <script type="text/javascript" src="{% static "js/calendar.js" %}"></script>
+    <br /><br />
+
+            <section id="description_forth" class="center-content">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" media="screen, print, handheld" type="text/css" href="{% static "css/calendar.css" %}" />
+
+        </section>
+    </head>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet"><link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <body>
+        <section id="downloadApps">
+            <div class="container">
+                <div class="row"><br /><br />
+                    <h1>Calendrier</h1>
+                </div>
+            </div>
+        </section>
+        {% autoescape off %}
+        {{ calendrier }}
+        {% endautoescape %}
+
+
+        <section id="downloadApps">
+            <div class="container">
+                <div class="row"><br /><br />
+                    <h1>Echeancier des évènements programmés</h1>
+                </div>
+            </div>
+        </section>
+
+        {% autoescape off %}
+        {{ gantt }}
+        {% endautoescape %}
+
+        <script>opacite(document.getElementById('cal_body'),70);</script>
+    </body>
+
+
+    {% endblock %}
+
+

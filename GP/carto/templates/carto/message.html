@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Détail des messages</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+        <section id="home">
+
+
+        </section>
+
+
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="main_testimonial_text center-content">
+                        <div class="col-md-12 col-sm-12 single_testimonial_text item">
+                            <p><br /><br /><h3>Collaborez facilement avec vos différents partenaires, quels qu'ils soient, à travers une plateforme d'échange de messages simplifiée.</h3> </p><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section  -->
+
+        <section id="QuestionText">
+            <div class="container">
+                <div class="row">
+                    <div class="QuestionText center-content">
+                        <p> <h3>Expéditeur : {{message.sender}} </h3></p>
+                        <p> <h3>Date : {{message.pub_date}} </h3></p>
+                        <p> <h3>Objet : {{message.objet}} </h3></p>
+                        <p> <h3>{{message.text}} </h3></p>
+                    </div>
+                </div>
+                        <p><a href="{% url 'carto:forum' %}">Retour aux messages</a></p><br /><br />
+            </div>
+        </section>
+        <section id="QuestionText">
+            <div class="container">
+            <p><a href="{% url 'carto:forum' %}delete/{{message.id_messagetiers}}">Supprimer ce message</a></p>
+        </div>
+        </section>
+    {% endblock %}
+
+

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Suppression de message</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+        <section id="work">
+            <div class="container"><br /><br /><br /><br /><br /><br /><br />
+            </div>
+        </section>
+        <section id="description_third">
+            <div class="container">
+                <br /><br /><br /><br /><br /><br />
+
+                <p>Message supprimé !</p>
+                <p><a href="{% url 'carto:forum' %}">Retour aux messages</a></p>
+
+            </div>
+        </section>
+    {% endblock %}

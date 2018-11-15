@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Détails des études stratégiques</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+        <section id="home">
+
+
+        </section>
+
+
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="main_testimonial_text center-content">
+                        <div class="col-md-12 col-sm-12 single_testimonial_text item">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                            <p><br /><br /><h1>Etude : {{etude.id_etudestrategie}}</h1></p><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section  -->
+
+        <section id="QuestionText">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <p><h3> Libelle : {{etude.libelle}}</h3></p>
+                        <p><h3> Date de l'étude : {{etude.datecreation}}</h3></p>
+                        <p><h3> Investissemnets : {{etude.investissements}}</h3></p>
+                    </div>
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <p><h3> Chronologie : {{etude.chronologie}}</h3></p>
+                        <p><h3> Note : {{etude.note}}</h3></p>
+                        <p><h3> Commentaires : {{ etude.commentaire }}</h3></p>
+                    </div>
+                </div>
+                        <p><a href="{% url 'carto:Etudes' %}">Retour aux Etudes</a></p><br /><br />
+            </div>
+        </section>
+        <section id="QuestionText">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <h3>Travaux associés :</h3>
+                        {% for travaux in list_travaux%}
+                        <li><p><a href="{% url 'carto:VueTravaux' %}{{travaux.id_travaux}}"><h3>{{travaux}}</h3></a></p></li>
+                        {% endfor %}
+
+
+                        <h3>Acteurs associés :</h3>
+                        {% for i in list_gestionnaire.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}<br /><br /><br /><br />
+                    </div>
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <h3>Zones géographiques concernées :</h3>
+                        {% for i in list_zoneGeo.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}
+
+
+
+                        <h3>Photos associées :</h3>
+                        <p>Survoler l'item pour afficher la photo</p>
+                        {% for i in list_photos %}
+                        <li><div class="tooltip-photo"><p><h3>{{i}}</h3><span class="tooltiptext"> <img src="/static/{{i.file}}" %}" > <br />{{i.libelle}}<br /> {{i.description}}</span></p></div></li>
+                        {% endfor %}<br /><br /><br /><br />
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+
+

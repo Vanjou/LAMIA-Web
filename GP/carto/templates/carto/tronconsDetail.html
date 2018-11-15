@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Détail des infrastructures linéaires</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+        <section id="home">
+
+
+        </section>
+
+
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="main_testimonial_text center-content">
+                        <div class="col-md-12 col-sm-12 single_testimonial_text item">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                            <p><br /><br /><h1>Infrastructure linéaire : {{troncon.id_infralineaire}}</h1> </p><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section  -->
+
+        <section id="QuestionText">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <p> <h3>Libelle : {{troncon.libelle}}</h3> </p>
+                        <p> <h3>Importance stratégique : {{troncon.importancestrat}} </h3></p>
+                        <p><h3> Etat de fonctionnement : {{troncon.etatfonct}}</h3> </p>
+                    </div>
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <p> <h3>Date de création : {{troncon.datecreation}}</h3> </p>
+                        <p> <h3>Date de la dernière mise à jour : {{troncon.datederniereobs}}</h3> </p>
+                        <p> <h3>Commentaire : {{troncon.commentaire}} </h3></p>
+                    </div>
+                </div>
+                        <p><a href="{% url 'carto:Troncons' %}">Retour aux infrastructures linéaires</a></p><br /><br />
+            </div>
+        </section>
+        <section id="QuestionText">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <h3>Equipements associés :</h3>
+                        {% for i in list_equipement %}
+                        <li><p><a href="{% url 'carto:Equipements' %}{{i.id_equipement}}"><h3>{{i}}</h3></a></p></li>
+                        {% endfor %}
+                        <h3>Elements d'environnement associés :</h3>
+                        {% for i in list_environnement %}
+                        <li><p><a href="{% url 'carto:Environnements' %}{{i.id_environnement}}"><h3>{{i}}</h3></a></p></li>
+                        {% endfor %}
+                        <h3>Acteurs associés :</h3>
+                        {% for i in list_gestionnaire.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}
+                        <h3>Zones géographiques concernées :</h3>
+                        {% for i in list_zoneGeo.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}<br /><br /><br /><br />
+                    </div>
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+
+                        <h3>Desordres observés :</h3>
+                        {% for i in list_desordre %}
+                        <li><p><a href="{% url 'carto:Desordres' %}{{i.id_desordre}}"><h3>{{i}}</h3></a></p></li>
+                        {% endfor %}
+                        <h3>Travaux à mener :</h3>
+                        {% for i in list_travaux %}
+                        <li><p><a href="{% url 'carto:VueTravaux' %}{{i.id_gestionnaire}}"><h3>{{i}}</h3></a></p></li>
+                        {% endfor %}
+
+
+                        <h3>Photos associées :</h3>
+                        <p>Survoler l'item pour afficher la photo</p>
+                        {% for i in list_photos %}
+                        <li><div class="tooltip-photo"><p><h3>{{i}}</h3><span class="tooltiptext"> <img src="/static/{{i.file}}" %}" > <br />{{i.libelle}}<br /> {{i.description}}</span></p></div></li>
+                        {% endfor %}<br /><br /><br /><br />
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+
+

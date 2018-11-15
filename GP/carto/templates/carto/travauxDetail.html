@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Détail des travaux</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+        <section id="home">
+
+
+        </section>
+
+
+        <section id="testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="main_testimonial_text center-content">
+                        <div class="col-md-12 col-sm-12 single_testimonial_text item">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                            <p><br /><br /><h1>{% if travauxouinterventiontiers %}Travaux : {%else%}Intervention de tiers : {%endif%}{{travaux.id_travaux}}</h1> </p><br /><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section  -->
+
+        <section id="QuestionText">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <p><h3> Libelle : {{travaux.libelle}}</h3></p>
+                        <p><h3> Type d'intervention : {% if travauxouinterventiontiers %} Travaux {%else%} Intervention de tiers {%endif%}</h3></p>
+                        <p><h3> Date de diagnostique : {{travaux.datecreation}}</h3> </p>
+                        <p><h3> Urgence : {{travaux.urgence}}</h3> </p>
+                        <p><h3> Durée estimée : {{travaux.estimationduree}}</h3> </p>
+                        <p><h3> Coûts estimée : {{travaux.estimationcouts}}</h3> </p>
+                    </div>
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        <p><h3> Echeance estimée : {{travaux.estimationecheance}}</h3> </p>
+                        <p><h3> Date de début : {{travaux.datedebut}}</h3> </p>
+                        <p><h3> Date de fin : {{travaux.datefin}}</h3> </p>
+                        <p><h3> Phase actuelle : {{travaux.phase}}</h3> </p>
+                        <p><h3> Commentaires : {{ travaux.commentaire }}</h3>  </p>
+                    </div>
+                </div>
+                        <p><a href="{% url 'carto:VueTravaux' %}">Retour aux Travaux</a></p><br /><br />
+            </div>
+        </section>
+        <section id="QuestionText">
+            <div class="container">
+                <div class="row">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+                        {% if travauxouinterventiontiers %}
+
+
+                        <h3>Infrastructures associées :</h3>
+                        {% for troncon in list_troncons %}
+                        <li><p><a href="{% url 'carto:Troncons' %}{{troncon.id_infralineaire}}"><h3>{{troncon}}</h3></a></p></li>
+                        {% endfor %}
+                        <h3>Noeuds associés :</h3>
+                        {% for noeud in list_noeuds%}
+                        <li><p><a href="{% url 'carto:Noeuds' %}{{noeud.id_noeud}}"><h3>{{noeud}}</h3></a></p></li>
+                        {% endfor %}
+                        <h3>Elements d'environnement associés :</h3>
+                        {% for environnement in list_env%}
+                        <li><p><a href="{% url 'carto:Environnements' %}{{environnement.id_noeud}}"><h3>{{environnement}}</h3></a></p></li>
+                        {% endfor %}
+                        <h3>Equipements associés :</h3>
+                        {% for equipement in list_equipements%}
+                        <li><p><a href="{% url 'carto:Equipements' %}{{equipement.id_noeud}}"><h3>{{equipement}}</h3></a></p></li>
+                        {% endfor %}
+
+
+                        <h3>Acteurs associés :</h3>
+                        {% for i in list_gestionnaire.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}<br /><br /><br /><br />
+                    </div>
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+
+                        <h3>Zones géographiques concernées :</h3>
+                        {% for i in list_zoneGeo.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}
+
+                        <h3>Observations effectuées :</h3>
+                        <p><a href="{% url 'carto:VueObservations' %}{{list_observations.id_observation}}"><h3>{{list_observations}}</h3></a></p>
+
+                        <h3>Etudes implicants ces travaux :</h3>
+                        {% for etude in list_etudes %}
+                        <p><a href="{% url 'carto:Etudes' %}{{etude.id_etudestrategie}}"><h3>{{etude}}</h3></a></p>
+                        {% endfor %}
+
+
+                        <h3>Photos associées :</h3>
+                        <p>Survoler l'item pour afficher la photo</p>
+                        {% for i in list_photos %}
+                        <li><div class="tooltip-photo"><p><h3>{{i}}</h3><span class="tooltiptext"> <img src="/static/{{i.file}}" %}" > <br />{{i.libelle}}<br /> {{i.description}}</span></p></div></li>
+                        {% endfor %}<br /><br /><br /><br />
+
+
+                        {%else%}
+
+
+
+                        <h3>Zones géographiques concernées :</h3>
+                        {% for i in list_zoneGeo.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}
+
+                        <h3>Acteurs associés :</h3>
+                        {% for i in list_gestionnaire.all %}
+                        <li><p><h3>{{i}}</h3></p></li>
+                        {% endfor %}<br /><br /><br /><br />
+                    </div>
+                    <div class="col-sm-6 col-xs-12"><br /><br />
+
+
+                        <h3>Photos associées :</h3>
+                        <p>Survoler l'item pour afficher la photo</p>
+                        {% for i in list_photos %}
+                        <li><div class="tooltip-photo"><p><h3>{{i}}</h3><span class="tooltiptext"> <img src="/static/{{i.file}}" %}" > <br />{{i.libelle}}<br /> {{i.description}}</span></p></div></li>
+                        {% endfor %}<br /><br /><br /><br />
+
+
+
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+
+

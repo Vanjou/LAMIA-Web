@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block header %}
+    <title>ARTELIA - MopiDigues - Rapports</title>
+    {% endblock %}
+
+    {% block content %}
+
+
+
+        <section id="description_third">
+            <div class="container">
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+
+            </div>
+
+
+
+            <div class="col-sm-5 col-xs-12"><br /><br />
+                <div class="iphone center-content wow fadeInLeft" data-wow-duration="1s">
+                    <img src="{% static "images/rapport.png" %}" alt="" />
+                </div>
+            </div>
+
+                        <div class="col-sm-7 col-xs- heading-text">
+                            <div class="single_home_content wow zoomIn" data-wow-duration="1s">
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                <h2> Liste de vos rapports :</h2>
+                {% for report in liste_rapports %}
+                <!--
+                    Pour un popup :
+
+                <div class="popup" onclick="popUpFunction{{report.id_rapport}}()">
+                    <p><li> {{ report.nom }} ({{ report.datecreation }}, {{ report.libelle }}) :
+                    <span class="popuptext" id="myPopup{{report.id_rapport}}">{{report.commentaire}}</span>
+                </div> <a href="{{report.id_rapport}}">télécharger le rapport</a></li></p>
+
+                        <script>
+                            // When the user clicks on <div>, open the popup
+                            function popUpFunction{{report.id_rapport}}() {
+                                var popup = document.getElementById("myPopup{{report.id_rapport}}");
+                                popup.classList.toggle("show");
+                            }
+                        </script>
+                -->
+
+
+                <div class="tooltip">{{ report.libelle }} ({{ report.datecreation }}) :
+                  <span class="tooltiptext">{{report.commentaire}}</span>
+                </div> <a href="{{report.id_rapport}}">télécharger le rapport</a></li></p>
+
+                {% endfor %}
+                                <p><br /><br /><br /><br /><br /></p>
+
+                        <img src="{% static "images/bandeau_logo.png" %}" alt="" />
+                <h2> Téléchargez ici votre base de données à différentes dates :</h2>
+                {% for bdd in bases_de_donnees %}
+                <a href="{% url 'carto:telechargerbdd' bdd.id_bdd%}">{{bdd}}</a></li></p>
+                {% endfor %}
+                <p></p>
+                <h2> Téléversement de vos documents :</h2>
+                <p>{{ message }}</p>
+                <form action="/carto/rapports/" method="post"  enctype="multipart/form-data">
+                {% csrf_token %}
+                <h3>Nom du fichier : </h3> {{ form.libelle }}<br/><br/>
+                <h3>Sélectionner un fichier : {{ form.file }}</h3><br/><br/>
+                <h3><input type="submit" value="Téléversemment" /></h3><br/>
+                </form>
+                </div>
+              </div>
+        </section>
+
+        <section id="description_third">
+            <div class="container">
+
+            </div><br /><br /><br />
+        </section>
+
+
+    {% endblock %}
+
+
